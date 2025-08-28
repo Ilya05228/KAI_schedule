@@ -1,0 +1,15 @@
+[project]
+name = "kai-schedule"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [{ name = "Ilya05228", email = "iliyaand05@gmail.com" }]
+requires-python = ">=3.13"
+dependencies = []
+
+[project.scripts]
+kai-schedule = "kai_schedule:main.main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
