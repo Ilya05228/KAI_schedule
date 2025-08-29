@@ -5,7 +5,14 @@ description = "Add your description here"
 readme = "README.md"
 authors = [{ name = "Ilya05228", email = "iliyaand05@gmail.com" }]
 requires-python = ">=3.13"
-dependencies = []
+dependencies = [
+    "beautifulsoup4>=4.13.5",
+    "icalendar>=6.3.1",
+    "pytz>=2025.2",
+    "requests>=2.32.5",
+    "selenium>=4.35.0",
+    "webdriver-manager>=4.0.2",
+]
 
 [project.scripts]
 kai-schedule = "kai_schedule:main.main"
@@ -13,3 +20,59 @@ kai-schedule = "kai_schedule:main.main"
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
+
+[tool.ruff]
+line-length = 150
+fix = true
+
+
+[tool.ruff.lint]
+select = ["ALL", "D", "EM"]
+extend-safe-fixes = ["C408", "EM"]
+exclude = ["*.ipynb"]
+
+ignore = [
+    "COM812",
+    "PLR2004",
+    "PGH004",
+    "UP046",
+    "D102",
+    "RUF003",
+    "FIX002",
+    "TD002",
+    "TD003",
+    "TD004",
+    "PLR0913",
+    "FBT001",
+    "FBT002",
+    "D107",
+    "ANN204",
+    "TC002",
+    "D400",
+    "D415",
+    "G004",
+    "TRY300",
+    "BLE001",
+    "RET504",
+    "EM101",
+    "TRY003",
+    "RUF002",
+    "PD901",
+    "RUF001",
+    "TRY401",
+    "ERA001",
+    "E741",
+    "T201",
+    "D105",
+]
+fixable = ["ALL"]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+line-ending = "lf"
+skip-magic-trailing-comma = false
+exclude = ["*.ipynb"]
