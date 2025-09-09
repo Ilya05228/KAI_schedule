@@ -3,8 +3,8 @@
 from pathlib import Path
 
 from kai_schedule.parser import ICSScheduleItem, JSONScheduleParser, create_ics_calendar
+def main()->None:
 
-if __name__ == "__main__":
     path = Path("./local_files/r.json")
     with path.open(encoding="utf-8") as f:
         json_content = f.read()
@@ -23,3 +23,5 @@ if __name__ == "__main__":
         ics_file.write(ics_content)
 
     print(f"Файл ICS успешно сохранён: {ics_path}")
+if __name__ == "__main__":
+    main()
