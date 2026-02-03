@@ -29,7 +29,8 @@ class EndByDate(RepeatEnd):
         self._until = value
 
     def to_rrule_arg_str(self) -> str:
-        return f"UNTIL={self.until.strftime('%Y%m%dT%H%M%SZ')}"
+        # Используем локальное время без Z (UTC)
+        return f"UNTIL={self.until.strftime('%Y%m%dT%H%M%S')}"
 
 
 class EndByCount(RepeatEnd):
@@ -103,8 +104,7 @@ class BaseRepeatRule(ABC):
         parts.append(f"INTERVAL={self.interval}")
         if self.end:
             parts.append(self.end.to_rrule_arg_str())
-        return f"{';'.join(parts)}"
-        # return f"RRULE:{';'.join(parts)}"
+        return f"FREQ=WEEKLY;{';'.join(parts)}"
 
 
 class DailyRepeatRule(BaseRepeatRule):

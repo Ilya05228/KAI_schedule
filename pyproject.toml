@@ -16,6 +16,7 @@ dependencies = [
 
 [project.scripts]
 kai-schedule = "kai_schedule:main.main"
+main = "kai_schedule:main.main"
 
 [build-system]
 requires = ["hatchling"]

@@ -24,11 +24,13 @@ logger = logging.getLogger(__name__)
 class JSONScheduleParser:
     """Парсер JSON-данных расписания для создания массива ScheduleItem."""
 
-    def __init__(self, json_content: str, start_year: int = 2025):
+    def __init__(self, json_content: str, start_date: datetime | None = None, end_date: datetime | None = None, start_year: int = 2025):
         self.data = json.loads(json_content)
+        self.start_date = start_date
+        self.end_date = end_date
         self.start_year = start_year
-        self.semester_start = datetime(start_year, 9, 1, tzinfo=ZoneInfo("Europe/Moscow"))
-        self.semester_end = datetime(start_year, 12, 31, tzinfo=ZoneInfo("Europe/Moscow"))
+        self.semester_start = start_date or datetime(start_year, 9, 1, tzinfo=ZoneInfo("Europe/Moscow"))
+        self.semester_end = end_date or datetime(self.start_year, 12, 31, tzinfo=ZoneInfo("Europe/Moscow"))
         self.weekday_map = {
             "1": Weekday.MONDAY,
             "2": Weekday.TUESDAY,
@@ -66,7 +68,8 @@ class JSONScheduleParser:
             if not d:
                 continue
             try:
-                parsed_date = datetime.strptime(f"{d}.{self.start_year}", "%d.%m.%Y").replace(tzinfo=ZoneInfo("Europe/Moscow"))
+                year = self.semester_start.year
+                parsed_date = datetime.strptime(f"{d}.{year}", "%d.%m.%Y").replace(tzinfo=ZoneInfo("Europe/Moscow"))
                 parsed_dates.append(parsed_date)
             except ValueError as e:
                 logger.critical(f"Ошибка в парсинге даты: {d}")
